@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="de-ch">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body onload="loadVersions()">
+    <div class="content">
+        <div class="box-card" id="listContainer">
+            <h1>Versionen</h1>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    function loadVersions() {
+        var div = document.getElementById("listContainer");
+
+        var req = new XMLHttpRequest();
+        req.responseType = 'json';
+        req.open('GET', 'versions.json', true);
+        req.onload = function () {
+            var jsonResponse = req.response;
+            jsonResponse.forEach(i => addItem(div, i))
+        };
+        req.send(null);
+    }
+
+    function addItem(div, item) {
+        var link = document.createElement("a");
+        link.href = item.version;
+        link.innerHTML = item.version;
+
+        var li = document.createElement("li");
+        li.appendChild(link);
+
+        div.appendChild(li);
+    }
+</script>
+
+</html>
