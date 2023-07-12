@@ -1,6 +1,9 @@
 name: 'Documentaion build'
 description: 'Converts markdown files to github pages versionized'
 inputs:
+  github-token:
+    description: 'Github token'
+    required: true
   version:
     description: 'Version'
     required: true
