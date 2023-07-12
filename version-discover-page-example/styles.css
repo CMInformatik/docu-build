@@ -1,0 +1,90 @@
+@charset "utf-8";
+
+/* CSS Document */
+
+body {
+    background: #f5f5f5;
+    font: 1em Helvetica, arial, sans-serif;
+    padding: 0;
+    margin: 0 0 40px 0;
+    color: #586475;
+}
+
+h1 {
+    color: #586475;
+    font-weight: normal;
+    font-size: 1.5em;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+a {
+    color: #009fe3;
+    text-decoration: none;
+}
+
+li:hover a,
+a:hover,
+a:active {
+    color: #586475;
+}
+
+header {
+    height: 50px;
+    background: #009fe3;
+}
+
+.box-logo {
+    max-width: 1920px;
+    width: 90%;
+    margin: auto;
+}
+
+header img {
+    margin-top: 10px;
+}
+
+.content {
+    max-width: 1920px;
+    width: 90%;
+    margin: auto;
+    padding-top: 40px;
+}
+
+.box-card {
+    padding: 40px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 14%), 0 4px 5px rgb(0 0 0 / 12%), 0 1px 10px rgb(0 0 0 / 20%);
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+ul {
+    margin-bottom: 0;
+    padding-left: 0;
+    border-top: solid 1px #bdbdbd;
+}
+
+li {
+    list-style: none;
+    padding: 20px 0 20px 0;
+    border-bottom: solid 1px #bdbdbd;
+}
+
+li:hover {
+    background: #f5f5f5;
+}
+
+li a:after {
+    content: url(arrow.svg);
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    float: right;
+    margin-right: 10px;
+}
+
+li a:first-child {
+    width: 100%;
+    display: inline-block;
+}

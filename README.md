@@ -25,7 +25,30 @@ To set up the `mkdocs.yml` file, follow these steps:
 
 For detailed information on configuring `mkdocs.yml`, refer to the [MkDocs User Guide](https://www.mkdocs.org/user-guide/configuration/). The user guide provides comprehensive documentation on various configuration options, including themes, navigation, Markdown extensions, and more.
 
-To ensure proper functionality, the following configuration needs to be included in the mkdocs.yml file:
+Use this example mkdocs.yml:
+```yaml
+site_name: [TODO: Site-Name]
+docs_dir: 'doc'
+nav:
+  ...
+plugins:
+  - search
+extra:
+  version:
+    provider: mike
+theme:
+  name: material
+  palette:
+    primary: light blue
+    scheme: default
+  features:
+    - navigation.tabs
+    - toc.integrate
+extra_css:
+    - stylesheets/cmi_docs.css
+```
+
+To ensure proper functionality, the following configuration needs to be included in the mkdocs.yml file (This configuration is needed for mike to work properly with MkDocs. It enables versioning of your documentation):
 
 ```yaml
 extra:
@@ -33,7 +56,7 @@ extra:
     provider: mike
 ```
 
-This configuration is needed for mike to work properly with MkDocs. It enables versioning of your documentation.
+The cmi_docs.css File can be found in this repository under `/example-css/cmi_docs.css` and needs to be copied in your repository under `/doc/stylesheets/cmi_docs.css`.
 
 ## Usage
 
@@ -58,4 +81,4 @@ steps:
 
 - `github-token` (required): GitHub token used for authentication and accessing repositories. Usually you can use `${{ secrets.GITHUB_TOKEN }}`
 - `version` (required): Specifies the version of the documentation (Example: v.1.1.0)
-- `versionDiscoveryPageLocation` (required): Specifies the location (directory) of the version discovery page. You can find an example of the version discovery page in this repository by navigating to the ./version-discovery-page-example directory
+- `versionDiscoveryPageLocation` (required): Specifies the location (directory) of the version discovery page. You can find an example of the version discovery page in this repository by navigating to the `/version-discovery-page-example` directory. This directory can be copied in your repository under `./version-discovery-page`. Replace all TODOs in the index.html file.
