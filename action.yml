@@ -1,0 +1,35 @@
+name: 'Documentaion build'
+description: 'Converts markdown files to github pages versionized'
+inputs:
+  version:
+    description: 'Version'
+    required: true
+  versionDiscoveryPageLocation:
+    description: 'Location of the version discovery page (directory)'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Install dependencies
+      shell: bash
+      run: |
+        pip install mkdocs-material
+        pip install mike
+
+    - name: Setup user
+      shell: bash
+      run: |
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+
+    - name: Deploy versionized documentation
+      shell: bash
+      run: |
+        mike deploy ${{ inputs.version }} --push
+
+    - name: Deploy version discovery page
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ${{ inputs.versionDiscoveryPageLocation }}
+        keep_files: true
