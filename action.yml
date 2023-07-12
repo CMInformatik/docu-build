@@ -1,5 +1,5 @@
 name: 'Documentaion build'
-description: 'Converts markdown files to github pages versionized'
+description: 'Converts markdown files using MkDocs to a versionized GitHub Pages documentation using mike'
 inputs:
   github-token:
     description: 'Github token'
