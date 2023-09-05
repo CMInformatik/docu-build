@@ -65,20 +65,22 @@ To use this action, include the following steps in your workflow:
 ```yaml
 steps:
     - name: Checkout
-        uses: actions/checkout@v3
-        with:
-            fetch-depth: 0 // Fetch-Depth is important, because we need all branches and the complete history
+      uses: actions/checkout@v3
+      with:
+         fetch-depth: 0 // Fetch-Depth is important, because we need all branches and the complete history
             
     - name: Build documentation and publish
-        uses: CMInformatik/docu-build@v1
-        with:
-            github-token: ${{ secrets.GITHUB_TOKEN }}
-            version: [Documentation version]
-            versionDiscoveryPageLocation: [Path to version discovery page]
+      uses: CMInformatik/docu-build@v1
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        version: ${{ steps.nbgv.outputs.NuGetPackageVersion }}
+        versionDiscoveryPageLocation: [Path to version discovery page]
+        alias: 'latest'
 ```
 
 ## Inputs
 
 - `github-token` (required): GitHub token used for authentication and accessing repositories. Usually you can use `${{ secrets.GITHUB_TOKEN }}`
 - `version` (required): Specifies the version of the documentation (Example: v.1.1.0)
+- `alias` : Adds a symbolic Link to that name ( eg 'latest' or 'stable')
 - `versionDiscoveryPageLocation` (required): Specifies the location (directory) of the version discovery page. You can find an example of the version discovery page in this repository by navigating to the `/version-discovery-page-example` directory. This directory can be copied in your repository under `./version-discovery-page`. Replace all TODOs in the index.html file.

@@ -7,6 +7,9 @@ inputs:
   version:
     description: 'Version'
     required: true
+  alias:
+    description: 'Creates a symbolic link with that name to the page'
+    required: false
   versionDiscoveryPageLocation:
     description: 'Location of the version discovery page (directory)'
     required: true
@@ -28,7 +31,7 @@ runs:
     - name: Deploy versionized documentation
       shell: bash
       run: |
-        mike deploy ${{ inputs.version }} --push
+        mike deploy ${{ inputs.version }} ${{ inputs.alias }} --push
 
     - name: Deploy version discovery page
       uses: peaceiris/actions-gh-pages@v3
