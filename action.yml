@@ -31,7 +31,7 @@ runs:
     - name: Deploy versionized documentation
       shell: bash
       run: |
-        mike deploy --rebase --update-aliases --push ${{ inputs.version }} ${{ inputs.alias }}
+        mike deploy --ignore-remote-status --update-aliases --push ${{ inputs.version }} ${{ inputs.alias }}
 
     - name: Deploy version discovery page
       uses: peaceiris/actions-gh-pages@v3
