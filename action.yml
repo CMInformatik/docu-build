@@ -17,6 +17,7 @@ runs:
   using: "composite"
   steps:
     - name: Install mkdocs and plugins
+      shell: bash
       run: |
         pip install mike mkdocs mkdocs-material mkdocs-drawio-file mkdocs-mermaid2-plugin
 
