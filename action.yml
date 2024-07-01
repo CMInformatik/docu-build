@@ -16,11 +16,9 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Install dependencies
-      shell: bash
+    - name: Install mkdocs and plugins
       run: |
-        pip install mkdocs-material
-        pip install mike
+        pip install mike mkdocs mkdocs-material mkdocs-drawio-file mkdocs-mermaid2-plugin
 
     - name: Setup user
       shell: bash
