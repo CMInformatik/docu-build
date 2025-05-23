@@ -13,6 +13,9 @@ inputs:
   versionDiscoveryPageLocation:
     description: 'Location of the version discovery page (directory)'
     required: true
+  external_repository:
+    description: 'Set an external repository (owner/repo).'
+    required: false
 runs:
   using: "composite"
   steps:
@@ -37,4 +40,5 @@ runs:
       with:
         github_token: ${{ inputs.github-token }}
         publish_dir: ${{ inputs.versionDiscoveryPageLocation }}
-        keep_files: true
+        keep_files: true$
+        external_repository: $${{ inputs.external_repository }}
