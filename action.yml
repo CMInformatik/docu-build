@@ -40,5 +40,5 @@ runs:
       with:
         github_token: ${{ inputs.github-token }}
         publish_dir: ${{ inputs.versionDiscoveryPageLocation }}
-        keep_files: true$
-        external_repository: $${{ inputs.external_repository }}
+        keep_files: true
+        external_repository: ${{ inputs.external_repository }}
