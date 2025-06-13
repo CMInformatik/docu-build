@@ -33,16 +33,41 @@ runs:
         git config user.name github-actions
         git config user.email github-actions@github.com
 
+    - name: Setup remote
+      shell: bash
+      if: ${{ inputs.external_repository != '' }}
+      run: |
+        git config --unset-all http.https://github.com/.extraheader
+        git remote add docuRemote https://cmiapps:${{ inputs.github-token }}@github.com/${{ inputs.external_repository }}.git
+        git fetch docuRemote
+
     - name: Deploy versionized documentation
       shell: bash
+      if: ${{ inputs.external_repository != '' }}
+      run: |
+        mike deploy --update-aliases --push ${{ inputs.version }} ${{ inputs.alias }} --remote docuRemote
+      working-directory: ${{ inputs.working-directory }}
+      
+    - name: Deploy versionized documentation
+      shell: bash
+      if: ${{ inputs.external_repository == '' }}
       run: |
         mike deploy --update-aliases --push ${{ inputs.version }} ${{ inputs.alias }}
       working-directory: ${{ inputs.working-directory }}
 
     - name: Deploy version discovery page
       uses: peaceiris/actions-gh-pages@v3
+      if: ${{ inputs.external_repository != '' }}
+      with:
+        personal_token: ${{ inputs.github-token }}
+        publish_dir: ${{ inputs.versionDiscoveryPageLocation }}
+        keep_files: true
+        external_repository: ${{ inputs.external_repository }}
+
+    - name: Deploy version discovery page
+      uses: peaceiris/actions-gh-pages@v3
+      if: ${{ inputs.external_repository == '' }}
       with:
         github_token: ${{ inputs.github-token }}
         publish_dir: ${{ inputs.versionDiscoveryPageLocation }}
         keep_files: true
-        external_repository: ${{ inputs.external_repository }}
