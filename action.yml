@@ -36,6 +36,7 @@ runs:
     - name: Setup remote
       shell: bash
       if: ${{ inputs.external_repository != '' }}
+      run: |
         git config --unset-all http.https://github.com/.extraheader
         git remote add docuRemote https://cmiapps:${{ inputs.github-token }}@github.com/${{ inputs.external_repository }}.git
 
