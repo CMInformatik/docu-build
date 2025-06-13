@@ -41,8 +41,17 @@ runs:
 
     - name: Deploy version discovery page
       uses: peaceiris/actions-gh-pages@v3
+      if: ${{ inputs.external_repository != '' }}
+      with:
+        personal_token: ${{ inputs.github-token }}
+        publish_dir: ${{ inputs.versionDiscoveryPageLocation }}
+        keep_files: true
+        external_repository: ${{ inputs.external_repository }}
+
+    - name: Deploy version discovery page
+      uses: peaceiris/actions-gh-pages@v3
+      if: ${{ inputs.external_repository == '' }}
       with:
         github_token: ${{ inputs.github-token }}
         publish_dir: ${{ inputs.versionDiscoveryPageLocation }}
         keep_files: true
-        external_repository: ${{ inputs.external_repository }}
