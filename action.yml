@@ -56,7 +56,7 @@ runs:
       working-directory: ${{ inputs.working-directory }}
 
     - name: Deploy version discovery page
-      uses: peaceiris/actions-gh-pages@v3
+      uses: peaceiris/actions-gh-pages@v4.1.0
       if: ${{ inputs.external_repository != '' }}
       with:
         personal_token: ${{ inputs.github-token }}
