@@ -37,9 +37,14 @@ runs:
       shell: bash
       if: ${{ inputs.external_repository != '' }}
       run: |
-        # extra headers aren't set anymore since checkout@v6
+        # v4 left auth at http.https://github.com/.extraheader;
+        # v6 left it behind includeIf.gitdir entries pointing at a credentials config.
+        # Might need to check it in the future to adapt to the next magic bullshit
         git config --unset-all http.https://github.com/.extraheader &> /dev/null || true
-        git remote add docuRemote https://${{ inputs.github-token }}@github.com/${{ inputs.external_repository }}.git
+        for key in $(git config --local --name-only --get-regexp '^includeIf\.gitdir:' 2>/dev/null); do
+          git config --local --unset-all "$key" 2>/dev/null || true
+        done
+        git remote add docuRemote https://cmiapps:${{ inputs.github-token }}@github.com/${{ inputs.external_repository }}.git
         git fetch docuRemote
 
     - name: Deploy versionized documentation
