@@ -39,7 +39,7 @@ runs:
       run: |
         # extra headers aren't set anymore since checkout@v6
         git config --unset-all http.https://github.com/.extraheader &> /dev/null || true
-        git remote add docuRemote https://cmiapps:${{ inputs.github-token }}@github.com/${{ inputs.external_repository }}.git
+        git remote add docuRemote https://${{ inputs.github-token }}@github.com/${{ inputs.external_repository }}.git
         git fetch docuRemote
 
     - name: Deploy versionized documentation
