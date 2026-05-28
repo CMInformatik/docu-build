@@ -37,7 +37,8 @@ runs:
       shell: bash
       if: ${{ inputs.external_repository != '' }}
       run: |
-        git config --unset-all http.https://github.com/.extraheader
+        # extra headers aren't set anymore since checkout@v6
+        git config --unset-all http.https://github.com/.extraheader &> /dev/null || true
         git remote add docuRemote https://cmiapps:${{ inputs.github-token }}@github.com/${{ inputs.external_repository }}.git
         git fetch docuRemote
 
@@ -47,7 +48,7 @@ runs:
       run: |
         mike deploy --update-aliases --push ${{ inputs.version }} ${{ inputs.alias }} --remote docuRemote
       working-directory: ${{ inputs.working-directory }}
-      
+
     - name: Deploy versionized documentation
       shell: bash
       if: ${{ inputs.external_repository == '' }}
